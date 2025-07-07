@@ -1,15 +1,7 @@
-import sqlalchemy as s
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped, sessionmaker, mapped_column as mc
-from .settings import settings
+from sqlalchemy.orm import Mapped, mapped_column as mc
+from db import Base
 from datetime import datetime
-
-engine = s.create_engine(settings.DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
-class Base(DeclarativeBase):
-    pass
+import sqlalchemy as s
 
 
 class CrmPerson(Base):
@@ -30,4 +22,4 @@ class CrmPersonBills(Base):
     owner: Mapped[int] = mc(s.ForeignKey("crm_person.id"))
     price: Mapped[int] = mc(s.String(), default="00.00")
     payment_date: Mapped[datetime] = mc(nullable=True)
-    is_paid: Mapped[bool] = mc(default=False, server_default="false")
+    is_paid: Mapped[bool] = mc(default=False, server_default=False)
