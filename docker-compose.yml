@@ -3,7 +3,7 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
-    command: ["uv", "run", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--reload"]
+    command: ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--reload"]
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/app
     depends_on:
